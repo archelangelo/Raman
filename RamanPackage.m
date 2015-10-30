@@ -9,10 +9,10 @@ function X = RamanPackage(B, ele, A)
     X = zeros(size(A));
     fprintf('Input %d spectra\n', n);
     for k = 1:n
-        C = BackSub(A(:, :, k), B, 1700, 2100, nan, false);
+        [C, ~, shft] = BackSub(A(:, :, k), B, 1700, 2100, nan, false);
         X(:, :, k) = [A(:, 1, k), C];
         [p, h, w] = PeakAnalyse(X(:, :, k), 2570, 2875);
-        fprintf('Spectrum %d\n', k);
+        fprintf('Spectrum %d\n\tBackground Shifted:%d\n', k, shft);
         fprintf('\tPeak at %.3f\n\tHeight: %.3f\n\tFWHM: %.3f\n', p, h, w);
     end
     RamanPlot(X, ele);
