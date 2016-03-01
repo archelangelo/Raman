@@ -1,8 +1,14 @@
-function [A, C] = PackageWrapper(filename, background, ele)
+function [A, C] = PackageWrapper(filename, background, ele, showpk, findpk)
 % This function takes in a Raman file and extract the
 % spectrum automatically and uses the RamanPackage to
 % analyse it.
 
+    if ~exist('showpk', 'var')
+        showpk = false;
+    end
+    if ~exist('findpk', 'var')
+        findpk = true;
+    end
     X = importdata(filename);
     B = importdata(background);
     if isnan(X(1, 1))
@@ -13,5 +19,5 @@ function [A, C] = PackageWrapper(filename, background, ele)
     else
         A = X;
     end
-    C = RamanPackage(B, ele, A);
+    C = RamanPackage(B, ele, A, showpk, findpk);
 end

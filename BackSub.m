@@ -1,4 +1,4 @@
-function [d4, sqd, shft] = BackSub(X, Y, st, nd, shft, plt)
+function [d4, sqd, shft, d3] = BackSub(X, Y, st, nd, shft, plt)
 % Subtraction of background
 %   This function fits the background to the data first and then subtracts
 %   it from the data
