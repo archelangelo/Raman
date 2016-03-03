@@ -15,7 +15,7 @@ function [d4, sqd, shft, d3] = BackSub(X, Y, st, nd, shft, plt)
                 shft = i;
             end
         end
-        [d4, sqd, ~] = BackSub(X, Y, st, nd, shft, plt);
+        [d4, sqd, ~, d3] = BackSub(X, Y, st, nd, shft, plt);
     else
         d0 = X(:, 1);
         d1 = X(:, 2);
