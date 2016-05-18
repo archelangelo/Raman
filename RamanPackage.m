@@ -13,6 +13,7 @@ function X = RamanPackage(B, ele, A, showpk, findpk)
     end
     n = size(A, 3);
     X = zeros(size(A));
+    Y = [];
     p = zeros(1, n);
     w = zeros(1, n);
     fprintf('Input %d spectra\n', n);

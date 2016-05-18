@@ -22,7 +22,7 @@ function hdl = RamanPlot(A, Yf, ele, showpk, p, w)
     end
     set(gca, 'FontSize', 18);
     axis([1200, 3400, -Inf, Inf]);
-    xlabel('Raman Shift (cm^{-1})');
-    ylabel('Intensity (a.u.)');
+    xlabel({'Raman Shift (cm$^{-1}$)'}, 'Interpreter', 'LaTeX');
+    ylabel({'Intensity (a.u.)'}, 'Interpreter', 'LaTeX');
     hold off
 end
