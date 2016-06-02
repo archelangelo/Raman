@@ -10,8 +10,9 @@ function hdl = RamanPlot(A, Yf, ele, showpk, p, w)
     grid minor
     hold on
     bs = 0;
+    hdl = [];
     for i = 1: size(A, 3)
-        plot(A(:, 1, i), A(:, 2, i) + bs, color(mod(i - 1, 3) +1));
+        hdl(i) = plot(A(:, 1, i), A(:, 2, i) + bs, color(mod(i - 1, 3) +1));
         if (showpk)
             plot(Yf(:, 1, i), Yf(:, 2, i) + bs, 'm');
             text(2900, bs + 0.4 * ele,...
