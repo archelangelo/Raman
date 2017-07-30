@@ -5,6 +5,7 @@ function hdl = RamanPlot(A, Yf, ele, showpk, p, w)
     if ~exist('showpk', 'var')
         showpk = false;
     end
+    figure;
     color = 'krb';
     grid on
     grid minor

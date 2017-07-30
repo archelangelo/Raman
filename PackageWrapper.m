@@ -27,4 +27,13 @@ function [A, C] = PackageWrapper(filename, background, ele, showpk, findpk)
         A = X;
     end
     C = RamanPackage(B, ele, A, showpk, findpk);
+    mask_S1 = B(:, 1) > 1460 & B(:, 1) < 1660;
+    mask_S2 = B(:, 1) > 1660 & B(:, 1) < 1960;
+    s12ratio_back = trapz(B(mask_S1, 1), B(mask_S1, 2), 1) / ...
+        trapz(B(mask_S2, 1), B(mask_S2, 2), 1);
+    s12ratio = trapz(A(mask_S1, 1), A(mask_S1, 2:end), 1) ./ ...
+        trapz(A(mask_S2, 1), A(mask_S2, 2:end), 1);
+    gs2ratio = s12ratio - s12ratio_back;
+    disp('G/S_1 Ratio:');
+    disp(gs2ratio);
 end

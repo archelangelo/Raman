@@ -23,25 +23,16 @@ function [d4, sqd, shft, d3] = BackSub(X, Y, st, nd, shft, plt)
             Y = adaptedback(Y, X);
         end
         d2 = Y(:, 2);
-        i = 1;
-        while i < size(d0, 1) && d0(i) < st
-            i = i + 1;
-        end
-        l = i;
-        while i < size(d0, 1) && d0(i) < nd
-            i = i + 1;
-        end
-        m = i;
+        mask = d0>st & d0<nd;
 
         if shft > 0
             d2 = [nan(shft, 1); d2(1: end - shft)];
         elseif shft < 0
             d2 = [d2(1 - shft: end); nan(-shft, 1)];
-            l = l + shft;
-            m = m + shft;
+            mask = [mask(1 - shft: end); false(-shft, 1)];
         end
-        x = d1(l: m);
-        y = d2(l: m);
+        x = d1(mask);
+        y = d2(mask);
         A = [sum(y.^2), sum(y); sum(y), size(y, 1)];
         B = [x'*y; sum(x)];
         sol = A\B;
