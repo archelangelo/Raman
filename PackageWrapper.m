@@ -11,6 +11,8 @@ function [A, C] = PackageWrapper(filename, background, ele, showpk, findpk)
     end
     X = importdata(filename);
     B = importdata(background);
+    
+    %% Determining the dimension of data
     if isnan(X(1, 1))
         if isnan(X(1, 2))
             A = zeros(size(X, 2) - 2, 2, size(X, 1)-1);
@@ -26,14 +28,20 @@ function [A, C] = PackageWrapper(filename, background, ele, showpk, findpk)
     else
         A = X;
     end
+    
+    %%
     B(:, 2) = B(:, 2) - min(B(:, 2));
     A(:, 2, :) = A(:, 2, :) - ...
         repmat(min(A(:, 2, :), [], 1), size(A, 1), 1, 1);
     C = RamanPackage(B, ele, A, showpk, findpk);
+    % Calculate S1/S2 ratio of background
     mask_S1 = B(:, 1) > 1460 & B(:, 1) < 1660;
     mask_S2 = B(:, 1) > 1660 & B(:, 1) < 1960;
     s12ratio_back = trapz(B(mask_S1, 1), B(mask_S1, 2), 1) / ...
         trapz(B(mask_S2, 1), B(mask_S2, 2), 1);
+    % Calculate S1/S2 ratio of specimen
+    mask_S1 = A(:, 1) > 1460 & A(:, 1) < 1660;
+    mask_S2 = A(:, 1) > 1660 & A(:, 1) < 1960;
     s12ratio = trapz(A(mask_S1, 1, 1), A(mask_S1, 2, :), 1) ./ ...
         trapz(A(mask_S2, 1, 1), A(mask_S2, 2, :), 1);
     s12ratio = reshape(s12ratio, 1, size(A, 3));

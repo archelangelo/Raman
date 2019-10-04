@@ -38,7 +38,7 @@ function [d4, sqd, shft, d3] = BackSub(X, Y, st, nd, shft, plt)
         sol = A\B;
         d3 = d2 .* sol(1) + sol(2);
         d4 = d1 - d3;
-        diff = x - (y .* sol(1) + sol(2));
+        diff = x./sol(1) - (y + sol(2)/sol(1));
         sqd = diff' * diff;
         if plt
             plot(d0, d1, 'b');
