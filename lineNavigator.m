@@ -14,6 +14,7 @@ function lineNavigator( line, k, data, coord, dx, ymax )
     idx = 1;
     subplot(2, 1, 2)
     plot(k, data(idx, :))
+    title(num2str(idx));
     xlim([1200 3400])
     ylim([-5 ymax])
 
@@ -44,6 +45,7 @@ function moveRamanPoint( src, evtdata, ...
     
     
     plot(ax(1), k, data(idx, :))
+    title(ax(1), num2str(idx));
     xlim([1200 3400])
     ylim([-5 ymax])
     % Plot the coordinate on the map

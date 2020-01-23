@@ -17,7 +17,7 @@ function [filenames, tokens] = nameMatch(pattern, varargin)
     files = dir(path);
     filenames = string({files.name});
     filenames = strjoin(filenames, '\n');
-    filenames = regexp(filenames, pattern, 'match')';
+    filenames = regexp(filenames, pattern, 'match', 'lineanchors')';
     clear files
     % Find tokens if findToken is true
     if findTokens

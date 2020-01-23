@@ -1,4 +1,4 @@
-function [A, C] = PackageWrapper(filename, background, ele, showpk, findpk)
+function [A, C, gs2ratio] = PackageWrapper(filename, background, ele, showpk, findpk)
 % This function takes in a Raman file and extract the
 % spectrum automatically and uses the RamanPackage to
 % analyse it.
@@ -46,6 +46,6 @@ function [A, C] = PackageWrapper(filename, background, ele, showpk, findpk)
         trapz(A(mask_S2, 1, 1), A(mask_S2, 2, :), 1);
     s12ratio = reshape(s12ratio, 1, size(A, 3));
     gs2ratio = s12ratio - repmat(s12ratio_back, 1, size(s12ratio, 2));
-    disp('G/S_1 ratio:');
+    disp('G/S_2 ratio:');
     disp(gs2ratio);
 end
